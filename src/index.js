@@ -20,6 +20,9 @@ class CountdownTimer {
   start() {
     const startTime = this.targetDate;
     refs.btnStart.setAttribute('disabled', 'disabled');
+    const currentTime = Date.now();
+    const deltaTime = startTime - currentTime;
+    this.updateClockFace(deltaTime);
     this.intervalId = setInterval(() => {
       const currentTime = Date.now();
       const deltaTime = startTime - currentTime;
@@ -33,10 +36,10 @@ class CountdownTimer {
     );
     const mins = this.pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = this.pad(Math.floor((time % (1000 * 60)) / 1000));
-    refs.days.textContent = `${days}`;
-    refs.hours.textContent = `${hours}`;
-    refs.mins.textContent = `${mins}`;
-    refs.secs.textContent = `${secs}`;
+    refs.days.textContent = days;
+    refs.hours.textContent = hours;
+    refs.mins.textContent = mins;
+    refs.secs.textContent = secs;
   }
   pad(value) {
     return String(value).padStart(2, '0');
@@ -48,10 +51,10 @@ class CountdownTimer {
     clearInterval(this.intervalId);
   }
   clear() {
-    refs.days.textContent = `00`;
-    refs.hours.textContent = `00`;
-    refs.mins.textContent = `00`;
-    refs.secs.textContent = `00`;
+    refs.days.textContent = '00';
+    refs.hours.textContent = '00';
+    refs.mins.textContent = '00';
+    refs.secs.textContent = '00';
   }
 }
 
